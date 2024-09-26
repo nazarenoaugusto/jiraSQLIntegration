@@ -1,0 +1,7 @@
+# jira_extension.control
+
+comment = 'Extension for applying SQL scripts with Jira integration'
+default_version = '1.0'
+relocatable = true
+schema = public 
+requires = [plpython3u]
