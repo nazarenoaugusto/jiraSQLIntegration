@@ -38,7 +38,7 @@ CREATE EXTENSION plpython3u;
 1. Clone the repository or download the extension files from GitHub.
    
    ```bash
-   git clone https://github.com/yourusername/jirasql-integration.git
+   git clone https://github.com/nazarenoaugusto/jirasql-integration.git
    ```
 
 2. Place the extension files in the PostgreSQL extension directory:
