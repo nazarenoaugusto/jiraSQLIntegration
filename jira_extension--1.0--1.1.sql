@@ -116,3 +116,37 @@ EXCEPTION
         RAISE;
 END;
 $$ LANGUAGE plpgsql;
+
+--
+-- Name: configure_jira(character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.configure_jira(jira_user character varying, jira_token character varying, jira_domain character varying) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    -- Limpar qualquer configuração existente
+    DELETE FROM migration_control.jira_config;
+
+    -- Inserir as novas configurações
+    INSERT INTO migration_control.jira_config (jira_user, jira_token, jira_domain)
+    VALUES (jira_user, jira_token, jira_domain);
+END;
+$$;
+
+ALTER FUNCTION public.configure_jira(jira_user character varying, jira_token character varying, jira_domain character varying) OWNER TO postgres;
+
+--
+-- Name: get_jira_config(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.get_jira_config() RETURNS TABLE(jira_user character varying, jira_token character varying, jira_domain character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    RETURN QUERY SELECT jc.jira_user, jc.jira_token, jc.jira_domain FROM migration_control.jira_config jc LIMIT 1;
+END;
+$$;
+
+ALTER FUNCTION public.get_jira_config() OWNER TO postgres;
+
