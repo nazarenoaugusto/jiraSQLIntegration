@@ -5,6 +5,7 @@ CREATE SCHEMA IF NOT EXISTS migration_control;
 
 -- Criar a tabela de configuração do Jira
 CREATE TABLE IF NOT EXISTS migration_control.jira_config (
+    id SERIAL NOT NULL PRIMARY KEY,
     jira_user TEXT NOT NULL,
     jira_token TEXT NOT NULL,
     jira_domain TEXT NOT NULL,
@@ -17,6 +18,7 @@ CREATE TABLE IF NOT EXISTS migration_control.jira_config (
 
 -- Criar a tabela de histórico dos scripts aplicados
 CREATE TABLE IF NOT EXISTS migration_control.executed_scripts (
+    id SERIAL NOT NULL PRIMARY KEY,
     ticket_jira VARCHAR NOT NULL,
     script_name VARCHAR NOT NULL,
     status VARCHAR NOT NULL,
